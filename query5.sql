@@ -1,1 +1,1 @@
-SELECT COUNT(*) FROM USER WHERE Rating > 1000;
+SELECT COUNT(DISTINCT User.UserID) FROM Item, User WHERE Item.SellerID = User.UserID AND User.Rating > 1000;

@@ -4,7 +4,7 @@
 .import items.dat Item
 update Item set Description = null where Description = 'NULL'; 
 
-.import category.dat Categories 
+.import category.dat Category 
 
 
 .import users.dat User 

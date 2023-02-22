@@ -29,6 +29,11 @@ from re import sub
 
 columnSeparator = "|"
 
+# items_file = open("items.dat", "w")
+# category = open("category.dat", "w")
+# users = open("users.dat", "a")
+# bids = open("bids.dat", "a")
+
 # Dictionary of months used for date transformation
 MONTHS = {'Jan':'01','Feb':'02','Mar':'03','Apr':'04','May':'05','Jun':'06',\
         'Jul':'07','Aug':'08','Sep':'09','Oct':'10','Nov':'11','Dec':'12'}
@@ -82,11 +87,13 @@ def parseJson(json_file):
         the SQL tables based on your relation design
         """
         
-        items_file = open("items.dat", "w+")
-        category = open("category.dat", "w+")
-        users = open("users.dat", "w+")
-        bids = open("bids.dat", "w+")
-         
+        items_file = open("items.dat", "a")
+        category = open("category.dat", "a")
+        users = open("users.dat", "a")
+        bids = open("bids.dat", "a")
+        
+      
+        
         keys = ["ItemID", "Name", "Category", "Currently", "First_Bid", "Number_of_Bids", "Bids", "Location", "Country", "Started", "Ends", 
                 "Seller", "Description"]
         
@@ -147,16 +154,16 @@ def parseJson(json_file):
                 items_t += "|" + "\"" + item["Description"].replace('\"', '\"\"') + "\""
      
             items_t += "\n"
-            if items_t not in fullset:
-                fullset.add(items_t)
-                items_file.write(items_t)
+            # if items_t not in fullset:
+            # fullset.add(items_t)
+            items_file.write(items_t)
             
             #categories: ItemID (int), Category (str)
             for element in item["Category"]:
                 category_t = "" + item_id + "|" + "\"" + element.replace('\"', '\"\"') + "\"" + "\n"
-                if category_t not in fullset:
-                    fullset.add(category_t)
-                    category.write(category_t)
+                # if category_t not in fullset:
+                # fullset.add(category_t)
+                category.write(category_t)
                     
             #user (seller): UserID (str), Rating (int), Location (str), Country (str)
             users_t = ""
@@ -180,9 +187,9 @@ def parseJson(json_file):
                 
             users_t += "\n"
             
-            if users_t not in fullset:
-                fullset.add(users_t)
-                users.write(users_t)
+            # if users_t not in fullset:
+            # fullset.add(users_t)
+            users.write(users_t)
             
             #bids: ItemID (int), UserID (str), Time (date-time), Amount (float/$)
             if not item["Bids"] == None:
